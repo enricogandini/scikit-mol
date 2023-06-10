@@ -12,10 +12,15 @@ from matplotlib.colors import LogNorm, Normalize
 from matplotlib.colors import FuncNorm
 import math
 from matplotlib.colors import TwoSlopeNorm
+import numpy as np
+import matplotlib
+import matplotlib as mpl
+import matplotlib.pyplot as plt
 
 #%%
 results_dir = 'parallel_results'
 
+#%%
 files = glob.glob(f"{results_dir}/Morgan*csv")
 
 files
@@ -39,10 +44,7 @@ for filepath in files:
 
 
 #%%
-import numpy as np
-import matplotlib
-import matplotlib as mpl
-import matplotlib.pyplot as plt
+
 
 vegetables = ["cucumber", "tomato", "lettuce", "asparagus",
               "potato", "wheat", "barley"]
@@ -123,6 +125,8 @@ def make_plot_2(results, transformer_name):
     mol_pr_sec = [int(c) for c in results.columns]/results.iloc[0]
 
     ax.set_title(f"Descriptor calculation parallelization times\n{transformer_name}\nMaximum throughput single-threaded: {mol_pr_sec.max():0.0F} mol/s")
+    ax.set_xlabel("Dataset size")
+    ax.set_ylabel("Number of processes")
     fig.tight_layout()
     return fig
 
